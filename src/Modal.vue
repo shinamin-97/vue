@@ -1,7 +1,7 @@
 <template>
   <div class="black-bg" v-if="modalopen == true">
     <div class="white-bg">
-      <img :src ="onerooms[clicknow].image" style="width: 100%;">
+      <img :src ="onerooms[clicknow].image" style="width: 50% height: 50%;">
       <h4>{{onerooms[clicknow].title}}</h4>
       <p>{{onerooms[clicknow].content}}</p>
       <input v-model="month">

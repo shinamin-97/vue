@@ -11,9 +11,12 @@
     <a v-for="i in menu" :key="i">{{i}}</a>
   </div>
 
-  <Discount/>
+  <Discount v-if="showDiscount == true" @cas="showDiscount = false"/>
+
+
 
   <button @click="priceSort">가격순정렬</button>
+  <button @click="repriceSort">가격역순정렬</button>
   <button @click="sortBack">되돌리기</button>
 
   <Card @openModal="modalopen = true; clicknow = i" :oneroom="onerooms[i]" v-for="(a,i) in onerooms" :key="i"/>
@@ -34,6 +37,8 @@ export default {
   name: 'App',
   data(){
     return{
+      showDiscount : true,
+      oneroomsOrigin : [...data],
       Object : {name : 'kim', age : 20},
       clicknow : 0,
       onerooms : data,
@@ -50,14 +55,28 @@ export default {
       this.report[0] +=1;
     },
     sortBack() {
-      
+     this.onerooms = [...this.oneroomsOrigin];
     },
     priceSort() {
       this.onerooms.sort(function(a,b){
         return a.price - b.price;
       })
     },
+    repriceSort() {
+      this.onerooms.sort(function(a,b){
+        return b.price - a.price;
+      })
+    },
+
   },
+
+  // watch:{
+  //     amount(a){
+  //       if(a < 1){
+  //         this.showDiscount == false;
+  //       }
+  //     }
+  //   },
 
   components: {
     Discount : Discount,
